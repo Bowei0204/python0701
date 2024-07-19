@@ -1,3 +1,5 @@
+import random
+
 class Person():
     def __init__(self,n:str,h:int,w:int):
         self._name = n
@@ -16,7 +18,7 @@ class Person():
     def weight(self)->int:
         return self._weight
 
-    def getBmi(self) -> float:
+    def getBMI(self) -> float:
         return self.weight / (self.height/100) ** 2
     
     def get_status(self) -> str:
@@ -34,5 +36,14 @@ class Person():
         else:
             return '體重過輕'
         
-    def bmi_print(self)->str:
-        return f"{self.name}你好\n身高是：{self.height}公分\n體重是：{self.weight}公斤\nBMI:{round(self.getBmi(),ndigits=2)}\n{self.get_status()}"
+    def B_print(self):
+        return f"""{self.name}你好
+身高是：{self.height}公分
+體重是：{self.weight}公斤
+BMI:{round(self.getBMI(),ndigits=2)}
+{self.get_status()}"""
+
+def getPerson(name:str) -> Person:
+    height = random.randint(150,190)
+    weight = random.randint(50,90)
+    return Person(n=name,h=height,w=weight)
