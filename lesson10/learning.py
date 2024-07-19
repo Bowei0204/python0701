@@ -22,7 +22,7 @@ class Person():
         return self.weight / (self.height/100) ** 2
     
     def get_status(self) -> str:
-        bmi:float = self.getBmi()
+        bmi:float = self.getBMI()
         if bmi >= 35:
             return '重度肥胖'
         elif bmi >= 30:
