@@ -22,24 +22,22 @@ def connect() -> Response | str:
 
     else:
         return response
-
+def search(response:Response,district:str) -> list[dict]:
+    data:list[dict] = response.json()
+    district_stations = []
+    for station in data:
+        if station['sarea'] == district:
+            district_stations.append(station)
+    return district_stations
 def main():
     response:Response | str = connect()
     if not isinstance(response,Response):
         print(response)
         return
-        
-    print("連線成功")
-
-    data:list[dict] = response.json()
 
     district:str = input("請輸入新北市行政區: ")
     district += "區"
-
-    district_stations = []
-    for station in data:
-        if station['sarea'] == district:
-            district_stations.append(station)
+    district_stations = search(response,district)
 
     if district_stations:
         pprint(district_stations)
