@@ -24,10 +24,7 @@ def connect() -> Response | str:
         return response
 def search(response:Response,district:str) -> list[dict]:
     data:list[dict] = response.json()
-    district_stations = []
-    for station in data:
-        if station['sarea'] == district:
-            district_stations.append(station)
+    district_stations = [station for station in data if station['sarea'] == district]
     return district_stations
 def main():
     response:Response | str = connect()
