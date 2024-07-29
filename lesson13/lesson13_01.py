@@ -1,4 +1,5 @@
 import requests
+import pyinputplus as pyip
 from requests import Response,ConnectionError,Timeout,TooManyRedirects,HTTPError
 from pprint import pprint
 
@@ -26,14 +27,21 @@ def search(response:Response,district:str) -> list[dict]:
     data:list[dict] = response.json()
     district_stations = [station for station in data if station['sarea'] == district]
     return district_stations
+def get_area(response:Response) ->list[str]:
+    data:list[dict] = response.json()
+    sareas:set = set()
+    for site in data:
+        sareas.add(site['sarea'])
+    return list(sareas)
+
 def main():
     response:Response | str = connect()
     if not isinstance(response,Response):
         print(response)
         return
-
-    district:str = input("請輸入新北市行政區: ")
-    district += "區"
+    
+    areas = get_area(response)
+    district = pyip.inputMenu(areas,"請輸入新北市行政區:\n",numbered= True)
     district_stations = search(response,district)
 
     if district_stations:
