@@ -28,8 +28,6 @@ def main():
     if not isinstance(response,Response):
         print(response)
         return
-
-    
         
     print("連線成功")
 
