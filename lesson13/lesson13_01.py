@@ -41,7 +41,6 @@ def main():
         if station['sarea'] == district:
             district_stations.append(station)
 
-
     if district_stations:
         pprint(district_stations)
     else:
