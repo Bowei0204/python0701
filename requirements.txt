@@ -3,3 +3,4 @@ matplotlib
 pyinputplus
 pandas
 numpy
+openpyxl
